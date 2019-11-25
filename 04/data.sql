@@ -12,6 +12,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+use vk;
+
 DROP TABLE IF EXISTS `blacklist`;
 CREATE TABLE `blacklist` (
   `initiator_user_id` bigint(20) unsigned NOT NULL,
