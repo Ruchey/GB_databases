@@ -12,12 +12,18 @@ select from_user_id from
 -- update likes set user_id = ceil(rand()*100), media_id = ceil(rand()*100); 
 -- update media set user_id = ceil(rand()*100);
 
-select media.user_id from media;
+select l.media_id, m.user_id, (TIMESTAMPDIFF(YEAR, p.birthday, NOW())) as ag, p.gender from (likes as l left join media as m on l.media_id = m.id)
+	left join profiles as p on m.user_id = p.user_id where (TIMESTAMPDIFF(YEAR, p.birthday, NOW())) < 10;
 
-select media.user_id from media, likes, profiles
-	where media.id = likes.media_id and (TIMESTAMPDIFF(YEAR, profiles.birthday, NOW())) < 10;
+-- Сам подсчёт кол-ва лайков
+select count(m.user_id) from (likes as l left join media as m on l.media_id = m.id)
+	left join profiles as p on m.user_id = p.user_id where (TIMESTAMPDIFF(YEAR, p.birthday, NOW())) < 10;
+
 
 -- Определить кто больше поставил лайков (всего) - мужчины или женщины?
 
+select (count(m.user_id)) as cnt, p.gender as gen from (likes as l left join media as m on l.media_id = m.id)
+		left join profiles as p on m.user_id = p.user_id where (TIMESTAMPDIFF(YEAR, p.birthday, NOW())) < 10
+		group by gender;
 
 
