@@ -45,10 +45,24 @@ create table cost_services (
 	id serial primary key,
 	categories_services_id bigint unsigned not null,
 	price mediumint unsigned,
-	explanation varchar(255),
+	explanation varchar(255) comment 'Пояснения для стоимости',
 	foreign key (categories_services_id) references categories_services(id)
 	on update cascade
 	on delete restrict
+);
+
+-- -------------------------------------------------------------------------------
+
+-- Стикеры
+drop table if exists stickers;
+create table stickers (
+	id serial primary key,
+	title varchar(100),
+	summary text comment 'Краткое описание или то, что будет отображаться в стикере',
+	description text comment 'Подробное описание или пусто, в случаи перехода стикера на др старницу',
+	buttonname varchar(20) comment 'Название кнопки',
+	url varchar(255),
+	stylestic enum ('style1', 'style2') comment 'Стиль стикера'
 );
 
 
